@@ -5,7 +5,9 @@ public class Game {
     private GamePanel gamePanel;
 
     public Game() {
-        gameWindow = new GameWindow(new GamePanel());
+        gamePanel = new GamePanel();
+        gameWindow = new GameWindow(gamePanel);
+        gamePanel.requestFocus();
     }
 
 }
