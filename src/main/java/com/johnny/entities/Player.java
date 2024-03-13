@@ -12,7 +12,7 @@ public class Player extends Entity{
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 15;
     private int playerAction = IDLE;
-    private boolean moving = false;
+    private boolean moving = false, attacking = false;
     private boolean left, up, right, down;
     private float playerSpeed = 2.0f;
 
@@ -38,16 +38,32 @@ public class Player extends Entity{
             aniIndex++;
             if(aniIndex >= getSpriteAmount(playerAction)){
                 aniIndex = 0;
+                attacking = false;
             }
         }
     }
 
     private void setAnimation(){
+        int startAni = playerAction;
+
         if(moving){
             playerAction = RUNNING;
         } else {
             playerAction = IDLE;
         }
+
+        if(attacking) {
+            playerAction = ATTACK;
+        }
+
+        if(startAni != playerAction){
+            resetAniTick();
+        }
+    }
+
+    private void resetAniTick() {
+        aniTick = 0;
+        aniIndex = 0;
     }
 
     private void updatePos(){
@@ -88,6 +104,17 @@ public class Player extends Entity{
                 e.printStackTrace();
             }
         }
+    }
+
+    public void resetDirBooleans(){
+        left = false;
+        right = false;
+        up = false;
+        down = false;
+    }
+
+    public void setAttacking(boolean attacking){
+        this.attacking = attacking;
     }
 
     public boolean isLeft() {
