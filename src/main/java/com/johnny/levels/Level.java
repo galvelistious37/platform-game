@@ -1,13 +1,13 @@
 package com.johnny.levels;
 
 public class Level {
-    private int[][] lvlDate;
+    private int[][] lvlData;
 
-    public Level(int[][] lvlDate){
-        this.lvlDate = lvlDate;
+    public Level(int[][] lvlData){
+        this.lvlData = lvlData;
     }
 
     public int getSpriteIndex(int x, int y){
-        return lvlDate[y][x];
+        return lvlData[y][x];
     }
 }
